@@ -1,0 +1,7 @@
+# Deposited data — fetched from OpenNeuro / Zenodo, not committed here
+data/
+*.mat
+*.csv
+
+# OS / editor cruft
+.DS_Store
