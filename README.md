@@ -55,7 +55,7 @@ matlab -batch "stats_analysis1_sit_walk('data/erp_arrays_n22.mat')"
 | `check_topo_consistency.m` | **Supp. Table S1** (topographic-consistency rows) | ERP `.mat` |
 | `stats_table3a_gmd_tanova.m` | **Supp. Table S1** (GMD / exact-TANOVA scalp-map row) | ERP `.mat` |
 | `stats_kinematic_table3b.m` | **Table 3B** — Water vs Clay kinematics (4 outcomes) | `data/` dir |
-| `stats_table1b_trialcounts.m` | **Table 1B** — retained trial-count RM-ANOVA | `data/` dir |
+| `stats_table1b_trialcounts.m` | **Table 1B** — retained trial-count 4-condition omnibus | `data/` dir |
 | `stats_table4a_timewindow.m` | **Table 4 Panel A** — time-window sensitivity | ERP `.mat` |
 | `stats_table4c_covariate.m` | **Table 4 Panel C** — trial-count covariate check | ERP `.mat`, counts `.csv` |
 
@@ -69,6 +69,12 @@ Each script prints its results next to the target values reported in the manuscr
 - **Permutation p** (the sign-flip corroboration tests and the label-swap TANOVA) is the
   *exact* test — all 2^n reassignments are enumerated, so the value is deterministic and
   platform-independent (no RNG seed).
+- **Normality-first test selection.** Where the manuscript chooses between a parametric and a
+  rank-based test, the choice is made by a Shapiro–Wilk gate at α = .05 (Royston 1992 AS R94,
+  matching `scipy.stats.shapiro`), applied to the within-participant contrast for paired
+  comparisons and to the additive-model residuals for the four-condition omnibus. The scripts
+  apply the same gate rather than hard-coding the test, so the printed test type is derived, not
+  assumed. `Friedman` uses the tie correction of `scipy.stats.friedmanchisquare`.
 - **Kinematics.** The L3 excursion inputs are orientation-corrected, drift-free per-stride Fourier
   displacements. No additional exclusions based on the derived kinematic values are applied by the
   scripts; the paired samples are wrist n = 16 and L3 n = 17, as determined by sensor-data availability.
