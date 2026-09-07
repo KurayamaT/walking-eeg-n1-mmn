@@ -1,6 +1,6 @@
 function stats_analysis2_water_clay(matpath)
 % STATS_ANALYSIS2_WATER_CLAY
-%   Analysis 2 (Walk-Water vs Walk-Clay). Reproduces the amplitude rows of Table 3
+%   Analysis 2 (Walk-Water vs Walk-Clay). Reproduces the amplitude rows of Table 4
 %   Panel A — the N1-window Stimulus x Condition interaction, the frontocentral-ROI
 %   MMN amplitude (with its distribution-free corroboration and the equivalence/TOST),
 %   from the deposited ERP arrays. Frontocentral ROI {Fz, FC1, FC2, Cz}. The
@@ -29,7 +29,7 @@ devN1 = amp(dev, n1w); stdN1 = amp(sd, n1w);
 devM  = amp(dev, mmnw); stdM  = amp(sd, mmnw);
 n = size(devN1, 1);
 
-fprintf('\n=== Table 3A (amplitude rows): Analysis 2 (Walk-Water vs Walk-Clay), n=%d ===\n', n);
+fprintf('\n=== Table 4 Panel A (amplitude rows): Analysis 2 (Walk-Water vs Walk-Clay), n=%d ===\n', n);
 
 % N1-window Stimulus x Condition interaction
 interc = (devN1(:, cw) - devN1(:, cc)) - (stdN1(:, cw) - stdN1(:, cc));

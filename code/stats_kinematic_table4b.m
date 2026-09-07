@@ -1,6 +1,6 @@
-function stats_kinematic_table3b(derived_dir)
-% STATS_KINEMATIC_TABLE3B
-%   Analysis 2 kinematics (Walk-Water vs Walk-Clay). Reproduces Table 3 Panel B
+function stats_kinematic_table4b(derived_dir)
+% STATS_KINEMATIC_TABLE4B
+%   Analysis 2 kinematics (Walk-Water vs Walk-Clay). Reproduces Table 4 Panel B
 %   from the deposited wide CSVs. Four co-primary outcomes, normality-first
 %   (Shapiro-Wilk gate -> paired t if normal, Wilcoxon signed-rank otherwise),
 %   Holm-Bonferroni x 4. Effect size: Cohen's d_z (paired t) or matched-pairs
@@ -12,7 +12,7 @@ function stats_kinematic_table3b(derived_dir)
 %   (Wrist cumulative 3D path length is not an outcome: no stable gravitational
 %   reference at the freely-rotating wrist.)
 %
-%   Usage: stats_kinematic_table3b('path/to/derived')
+%   Usage: stats_kinematic_table4b('path/to/derived')
 %     where the directory holds
 %       kinematic_wrist_3cond_paired_wide_n22.csv
 %       kinematic_L3_3cond_paired_wide_n22.csv
@@ -23,7 +23,7 @@ end
 W = readtable(fullfile(derived_dir, 'kinematic_wrist_3cond_paired_wide_n22.csv'));
 L = readtable(fullfile(derived_dir, 'kinematic_L3_3cond_paired_wide_n22.csv'));
 
-% sensor | measure | source table | Table-3B target string
+% sensor | measure | source table | Table-4B target string
 defs = {
     'wrist', 'jerk_RMS_3d',     W, 'Wilcoxon W=16  p_raw=.005  p_Holm=.010  r=-0.76   (Water 2.03+/-0.87  Clay 2.52+/-0.99)';
     'L3',    'jerk_RMS_3d',     L, 'paired t(16)=-2.89  p_raw=.011  p_Holm=.011  d_z=-0.70   (Water 4.45+/-1.24  Clay 4.79+/-1.31)';
@@ -32,7 +32,7 @@ defs = {
 };
 n_def = size(defs, 1);
 
-fprintf('\n=== Table 3B: Analysis 2 kinematics (Walk-Water vs Walk-Clay) ===\n');
+fprintf('\n=== Table 4B: Analysis 2 kinematics (Walk-Water vs Walk-Clay) ===\n');
 fprintf('    normality-first (Shapiro-Wilk gate), Holm x 4, paired Water-vs-Clay, no S06 exclusion\n\n');
 
 test_name = cell(n_def, 1);
@@ -79,7 +79,7 @@ for k = 1:n_def
         p_chosen(k), p_holm(k), es_str{k}, sig_star(p_holm(k)), means_str{k});
     fprintf('        [target: %s]\n', defs{k, 4});
 end
-fprintf('\n  All four Water<Clay, significant after Holm x 4 -> reproduces Table 3B.\n');
+fprintf('\n  All four Water<Clay, significant after Holm x 4 -> reproduces Table 4B.\n');
 end
 
 

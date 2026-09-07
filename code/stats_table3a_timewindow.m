@@ -1,13 +1,13 @@
-function stats_table4a_timewindow(matpath)
-% STATS_TABLE4A_TIMEWINDOW
-%   Table 4 Panel A: time-window sensitivity of the Sit vs Walk-Free
+function stats_table3a_timewindow(matpath)
+% STATS_TABLE3A_TIMEWINDOW
+%   Table 3 Panel A: time-window sensitivity of the Sit vs Walk-Free
 %   Stimulus x Condition interaction over the frontocentral ROI {Fz, FC1, FC2, Cz}.
 %   For each window the interaction contrast per participant is
 %       [(dev_walk - dev_sit) - (std_walk - std_sit)]
 %   and is tested with a one-sample t-test (t^2 = F(1,n-1)); d_z = mean/SD.
 %   Reproduced from the deposited canonical ERP arrays.
 %
-%   Usage: stats_table4a_timewindow('path/to/erp_arrays_n22.mat')
+%   Usage: stats_table3a_timewindow('path/to/erp_arrays_n22.mat')
 
 if nargin < 1 || isempty(matpath)
     matpath = fullfile('..', 'data', 'erp_arrays_n22.mat');
@@ -27,7 +27,7 @@ wins = { 'N1 (80-130 ms) ', 80, 130,  '[target t=+2.50 p=.021 dz=+0.53]';
          '150-250 ms     ', 150, 250, '[target t=+0.28 p=.781 dz=+0.06]';
          '200-300 ms     ', 200, 300, '[target t=-0.01 p=.992 dz=-0.00]' };
 
-fprintf('\n=== Table 4A: time-window sensitivity of Sit vs Walk-Free interaction (ROI) ===\n');
+fprintf('\n=== Table 3A: time-window sensitivity of Sit vs Walk-Free interaction (ROI) ===\n');
 for k = 1:size(wins, 1)
     w = t >= wins{k, 2} & t <= wins{k, 3};
     dN = amp(dev, w); sN = amp(sd, w);

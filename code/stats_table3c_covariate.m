@@ -1,6 +1,6 @@
-function stats_table4c_covariate(matpath, counts_csv)
-% STATS_TABLE4C_COVARIATE
-%   Table 4 Panel C: retained-trial-count covariate check on the Sit vs Walk-Free
+function stats_table3c_covariate(matpath, counts_csv)
+% STATS_TABLE3C_COVARIATE
+%   Table 3 Panel C: retained-trial-count covariate check on the Sit vs Walk-Free
 %   Stimulus x Condition interaction over the frontocentral ROI {Fz, FC1, FC2, Cz}.
 %
 %   The interaction is a within-participant contrast:
@@ -10,13 +10,13 @@ function stats_table4c_covariate(matpath, counts_csv)
 %                 interaction contrast (the count analogue of d_i; within-stimulus
 %                 centring cancels in the contrast) -> adjusted-intercept F(1,20).
 %
-%   Reproduces Table 4 Panel C exactly: BASE beta = +0.280, F(1,21) = 6.26, p = .021;
+%   Reproduces Table 3 Panel C exactly: BASE beta = +0.280, F(1,21) = 6.26, p = .021;
 %   COVARIATE beta = +0.280, F(1,20) = 6.78, p = .017. The covariate k_i is the retained-
 %   trial-count interaction contrast (the count analogue of the amplitude interaction
 %   contrast; within-stimulus centring cancels in the contrast). The interaction
 %   survives adjustment for retained trial count.
 %
-%   Usage: stats_table4c_covariate('path/to/erp_arrays_n22.mat', 'path/to/per_subject_trial_counts_n22.csv')
+%   Usage: stats_table3c_covariate('path/to/erp_arrays_n22.mat', 'path/to/per_subject_trial_counts_n22.csv')
 
 if nargin < 1 || isempty(matpath)
     matpath = fullfile('..', 'data', 'erp_arrays_n22.mat');
@@ -40,7 +40,7 @@ d = ((dN(:, cw) - dN(:, csit)) - (sN(:, cw) - sN(:, csit)));      % amplitude (n
 k = (C.walk_dev - C.sit_dev) - (C.walk_std - C.sit_std);            % retained-count analogue
 n = numel(d);
 
-fprintf('\n=== Table 4C: retained-trial-count covariate check (Sit vs Walk-Free interaction) ===\n');
+fprintf('\n=== Table 3C: retained-trial-count covariate check (Sit vs Walk-Free interaction) ===\n');
 
 % Base: one-sample test of the interaction contrast
 t0 = mean(d) / (std(d) / sqrt(n)); F0 = t0^2; p0 = 1 - fcdf(F0, 1, n - 1);

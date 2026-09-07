@@ -1,6 +1,6 @@
 # walking-eeg-n1-mmn
 
-MATLAB re-implementation of the statistical analyses reported in the manuscript *"Preferential attenuation of deviant-evoked auditory N1 responses during treadmill walking"* (auditory N1/MMN, passive frequency oddball; EEG n = 22, kinematics n = 16–17). The scripts reproduce specified tables, panels, or rows deterministically from the deposited reproducibility data. The Table 4 Panel B and Panel D sensitivity analyses additionally require ERP-array variants available from the corresponding author; see "Scope and two on-request items" below.
+MATLAB re-implementation of the statistical analyses reported in the manuscript *"Treadmill walking differentially modulates standard- and deviant-evoked auditory responses in the N1 window"* (auditory N1/MMN, passive frequency oddball; EEG n = 22, kinematics n = 16–17). The scripts reproduce specified tables, panels, or rows deterministically from the deposited reproducibility data. The Table 3 Panel B and Panel D sensitivity analyses additionally require ERP-array variants available from the corresponding author; see "Scope and two on-request items" below.
 
 This repository contains **code only**. The data are deposited separately and will be made openly available upon publication (during peer review they are available to editors and reviewers via a private link); see the Data section below.
 
@@ -11,7 +11,7 @@ The data underlying the tables reported in the manuscript will be made openly av
 to editors and reviewers via a private link. The deposit comprises raw EEG (BIDS-EEG), the raw wrist/L3
 accelerometry (`sourcedata/kinematic/`), and a reproducibility set
 (`derivatives/reproducibility/`) with the subject-/condition-averaged ERP arrays,
-the derived kinematic outcome tables, and the retained trial counts. The Table 4 Panel B and
+the derived kinematic outcome tables, and the retained trial counts. The Table 3 Panel B and
 Panel D sensitivity analyses additionally require ERP-array variants available from the
 corresponding author (see "Scope and two on-request items" below).
 
@@ -20,13 +20,15 @@ Put these deposited files (from `derivatives/reproducibility/` on OpenNeuro) in 
 
 | File | Backs |
 |---|---|
-| `erp_arrays_n22.mat` | subject × condition × channel × time ERP arrays (separate standard-, deviant-, and difference-evoked arrays) — all reported EEG results except the Table 4 Panel B and Panel D variant rows |
-| `kinematic_wrist_3cond_paired_wide_n22.csv` | Table 3B (wrist) |
-| `kinematic_L3_3cond_paired_wide_n22.csv` | Table 3B (L3) |
-| `per_subject_trial_counts_n22.csv` | Table 1B, Table 4 Panel C |
+| `erp_arrays_n22.mat` | subject × condition × channel × time ERP arrays (separate standard-, deviant-, and difference-evoked arrays) — all reported EEG results except the Table 3 Panel B and Panel D variant rows |
+| `kinematic_wrist_3cond_paired_wide_n22.csv` | Table 4 Panel B (wrist) |
+| `kinematic_L3_3cond_paired_wide_n22.csv` | Table 4 Panel B (L3) |
+| `per_subject_trial_counts_n22.csv` | Table 1B, Table 3 Panel C |
+
+Table 5 needs only `erp_arrays_n22.mat`: the retained trial counts are read from the arrays' own `n_std_mat` / `n_dev_mat`, and the two averaged-waveform RMS measures are computed from the ROI-averaged waveforms.
 
 **Determinism.** Every statistic reproduced here is deterministic *given the deposited
-derived data* (the two Table 4 sensitivity variants, Panels B and D, instead require the
+derived data* (the two Table 3 sensitivity variants, Panels B and D, instead require the
 on-request ERP-array variants; see below). Two upstream steps are tool/platform-dependent and are therefore
 deposited as derived tables rather than regenerated here: the raw→ERP-arrays step
 (FastICA) and the raw→derived-kinematics step (drift-free Fourier displacement with
@@ -51,13 +53,14 @@ matlab -batch "stats_analysis1_sit_walk('data/erp_arrays_n22.mat')"
 |---|---|---|
 | `stats_analysis1_sit_walk.m` | **Table 2** — Sit vs Walk-Free N1-window analysis | ERP `.mat` |
 | `stats_analysis1_n1_interaction.m` | Table 2 — N1 Stimulus × Condition interaction | ERP `.mat` |
-| `stats_analysis2_water_clay.m` | **Table 3A** (MMN amplitude + TOST) and **Supp. Table S1** (permutation/Wilcoxon corroboration) | ERP `.mat` |
+| `stats_analysis2_water_clay.m` | **Table 4 Panel A** (MMN amplitude + TOST) and **Supp. Table S1** (permutation/Wilcoxon corroboration) | ERP `.mat` |
 | `check_topo_consistency.m` | **Supp. Table S1** (topographic-consistency rows) | ERP `.mat` |
-| `stats_table3a_gmd_tanova.m` | **Supp. Table S1** (GMD / exact-TANOVA scalp-map row) | ERP `.mat` |
-| `stats_kinematic_table3b.m` | **Table 3B** — Water vs Clay kinematics (4 outcomes) | `data/` dir |
+| `stats_tableS1_gmd_tanova.m` | **Supp. Table S1** (GMD / exact-TANOVA scalp-map row; exact p = .134) | ERP `.mat` |
+| `stats_kinematic_table4b.m` | **Table 4 Panel B** — Water vs Clay kinematics (4 outcomes) | `data/` dir |
 | `stats_table1b_trialcounts.m` | **Table 1B** — retained trial-count 4-condition omnibus | `data/` dir |
-| `stats_table4a_timewindow.m` | **Table 4 Panel A** — time-window sensitivity | ERP `.mat` |
-| `stats_table4c_covariate.m` | **Table 4 Panel C** — trial-count covariate check | ERP `.mat`, counts `.csv` |
+| `stats_table3a_timewindow.m` | **Table 3 Panel A** — time-window sensitivity | ERP `.mat` |
+| `stats_table3c_covariate.m` | **Table 3 Panel C** — trial-count covariate check | ERP `.mat`, counts `.csv` |
+| `stats_table5_eeg_quality.m` | **Table 5** — condition-wise EEG data-quality measures and the Sit vs Walk-Free contrast | ERP `.mat` |
 
 Each script prints its results next to the target values reported in the manuscript in `[...]`.
 
@@ -75,17 +78,24 @@ Each script prints its results next to the target values reported in the manuscr
   comparisons and to the additive-model residuals for the four-condition omnibus. The scripts
   apply the same gate rather than hard-coding the test, so the printed test type is derived, not
   assumed. `Friedman` uses the tie correction of `scipy.stats.friedmanchisquare`.
+- **Data-quality measures (Table 5).** The two RMS measures are taken on each participant's
+  ROI-averaged waveform, separately for the standard- and deviant-evoked waveforms and then
+  averaged over the two stimulus types, in a prestimulus window (-50..0 ms) and a late window
+  (350..450 ms) that lies outside every analysis window and is unaffected by baseline
+  correction. They are descriptive proxies for data quality, not noise, signal-to-noise or
+  single-trial estimates. The Sit vs Walk-Free column uses the same normality-first rule as the
+  rest of the manuscript, with Holm-Bonferroni across the four measures.
 - **Kinematics.** The L3 excursion inputs are orientation-corrected, drift-free per-stride Fourier
   displacements. No additional exclusions based on the derived kinematic values are applied by the
   scripts; the paired samples are wrist n = 16 and L3 n = 17, as determined by sensor-data availability.
 
 ## Scope and two on-request items
 
-- `stats_table4c_covariate.m` reproduces Table 4 Panel C using a transparent
+- `stats_table3c_covariate.m` reproduces Table 3 Panel C using a transparent
   within-participant contrast ANCOVA (base β = +0.280, F(1,21) = 6.26; covariate-adjusted
   β = +0.280, F(1,20) = 6.78). The interaction remained significant after adjustment for
   retained trial counts.
-- **Table 4 Panel B** (0.5- and 0.1-Hz high-pass filters) and **Panel D** (no ICA) require the
+- **Table 3 Panel B** (0.5- and 0.1-Hz high-pass filters) and **Panel D** (no ICA) require the
   corresponding ERP-array variants generated by the original preprocessing pipeline. These
   variants are available from the corresponding author upon reasonable request. The
   1.0-Hz/FastICA reference rows can be reproduced from the deposited canonical ERP array.

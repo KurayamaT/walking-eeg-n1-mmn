@@ -1,6 +1,6 @@
 function stats_table1b_trialcounts(derived_dir)
 % STATS_TABLE1B_TRIALCOUNTS
-%   Table 1 Panel B: retained trial counts per condition (after artifact rejection)
+%   Table 1 Panel B: retained trial counts per condition (after artefact rejection)
 %   and the four-condition (Sit, Walk-Free, Walk-Water, Walk-Clay) omnibus test on
 %   the counts, separately for Standard and Deviant stimuli. Reproduced from the
 %   deposited per-participant trial-count table.

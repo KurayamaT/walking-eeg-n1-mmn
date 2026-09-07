@@ -1,6 +1,6 @@
-function stats_table3a_gmd_tanova(matpath)
-% STATS_TABLE3A_GMD_TANOVA
-%   Table 3A (spatial characterisation) — direct scalp-map comparison of the
+function stats_tableS1_gmd_tanova(matpath)
+% STATS_TABLES1_GMD_TANOVA
+%   Supplementary Table S1 (spatial characterisation) — direct scalp-map comparison of the
 %   MMN-window (130-200 ms) deviant-minus-standard maps, Walk-Water vs Walk-Clay:
 %   global map dissimilarity (GMD) of the grand-average maps and a label-swap
 %   TANOVA (topographic ANOVA). Each participant's 32-channel map is average-
@@ -9,9 +9,10 @@ function stats_table3a_gmd_tanova(matpath)
 %
 %   The TANOVA p is the EXACT label-swap permutation: all 2^n within-participant
 %   Water/Clay swaps are enumerated, so the value is deterministic and platform-
-%   independent (the published .131 was a 10,000-sample Monte-Carlo estimate).
+%   independent. The manuscript reports this exact value (p = .134); an earlier
+%   .131 was a 10,000-sample Monte-Carlo estimate of the same test.
 %
-%   Usage: stats_table3a_gmd_tanova('path/to/erp_arrays_n22.mat')
+%   Usage: stats_tableS1_gmd_tanova('path/to/erp_arrays_n22.mat')
 
 if nargin < 1 || isempty(matpath)
     matpath = fullfile('..', 'data', 'erp_arrays_n22.mat');
@@ -29,8 +30,8 @@ n = size(A, 1);
 obs = gmd(mean(A, 1), mean(B, 1));
 p = tanova_exact(A, B);
 
-fprintf('\n=== Table 3A (spatial): MMN-window direct scalp-map GMD / TANOVA, Water vs Clay ===\n');
-fprintf('  n=%d  GMD=%.3f  TANOVA_p(exact)=%.3f   [target GMD=0.310  TANOVA=.134 (exact; .131 was Monte-Carlo)]\n', ...
+fprintf('\n=== Supplementary Table S1 (spatial): MMN-window direct scalp-map GMD / TANOVA, Water vs Clay ===\n');
+fprintf('  n=%d  GMD=%.3f  TANOVA_p(exact)=%.3f   [target GMD=0.310  TANOVA=.134 (exact)]\n', ...
         n, obs, p);
 end
 
