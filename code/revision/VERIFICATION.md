@@ -1,3 +1,36 @@
+# Synchronisation with the current revision (30 October 2026)
+
+`rv06_stimulus_history.m` has been synchronised with the existing, previously checked
+analysis implementation in the authors' working repository (commit aa4672c). It includes
+1.0, 0.5 and 0.1 Hz, excludes recordings with more than 12 bad channels at the corresponding
+setting, and requires at least one retained trial per transition. The optional QC-file
+default is adapted to this repository: `recording_qc.csv` beside the participant-level CSV.
+Both paths can be supplied explicitly. See README.md for the required columns.
+
+This update transfers existing code and updates documentation. It does not add an analysis,
+rerun the statistics, or constitute a new numerical verification. The calculation code
+matches the current working implementation; only the optional input-file default and
+comments differ. The 12 October checks below remain a historical record of the version
+and table numbering used at that time. They are not presented as checks of this update.
+
+| 12 October label | Current manuscript |
+|---|---|
+| Table S2: 18-participant sensitivity | Not included in the current manuscript |
+| Table S3: paired filter changes | Table S2 (common n = 19); historical n = 18 output is not reported |
+| Table S4: multiplicity | Table S3 |
+| Table S5: processing counts | Table S4 |
+| Table S6: covariate slopes | Table S5 |
+| Table S7: latency windows | Table S6 |
+| Table S8: early positivity | Table S7 |
+| Table S9: stimulus history | Table S8 |
+| Fig. S8: common-participant filter waveforms | Fig. S6 |
+
+The current function guide and MATLAB header comments use the current numbering.
+The historical `common18` calculation is retained; no exclusion rule for the reported
+19-participant filter comparison has been changed.
+
+---
+
 # Verification of the revision analyses (12 October 2026)
 
 The functions in this folder were run on the authors' analysis machine and compared with

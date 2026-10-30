@@ -1,6 +1,6 @@
 function R = rv05_early_positivity(erp, hpf_paths)
 % RV05_EARLY_POSITIVITY  Descriptive checks of the positivity preceding N1
-%   (Supplementary Table S8; Supplementary Results S-R1; values underlying Fig. S8).
+%   (Supplementary Table S7; Supplementary Results S-R1; values underlying Fig. S6).
 %   erp: canonical arrays; hpf_paths: arrays reprocessed at 1.0, 0.5 and 0.1 Hz.
 E = rv_load_erp(erp);
 early = E.t >= 40 & E.t <= 70;

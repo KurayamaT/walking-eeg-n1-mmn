@@ -1,10 +1,10 @@
 function R = rv01_filter_common_sample(paths)
 % RV01_FILTER_COMMON_SAMPLE  High-pass sensitivity of the N1 interaction
-%   (main-text Table 3 Panel B; Supplementary Tables S2 and S3).
+%   (main-text Table 3 Panel B; Supplementary Table S2).
 %   paths: ERP arrays reprocessed at 1.0, 0.5 and 0.1 Hz (cell array of three .mat files).
 %   Available = participants with Sit and Walk-Free ERPs at that setting.
 %   Common 19 = participants with both ERPs at all three settings.
-%   Common 18 = the common sample without S11 (ICA iteration-limit case).
+%   Common 18 = the common sample without S11 (historical output, not reported in the current manuscript).
 cut = [1 .5 .1];
 C = nan(22, 3); ok = false(22, 3);
 for f = 1:3

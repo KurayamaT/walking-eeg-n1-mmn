@@ -1,6 +1,6 @@
 function [T, I] = rv04_latency_windows(erp)
 % RV04_LATENCY_WINDOWS  Additional latency-window sensitivity for both contrasts
-%   (Supplementary Table S7; Results 3.2). Window boundaries are inclusive.
+%   (Supplementary Table S6; Results 3.2). Window boundaries are inclusive.
 E = rv_load_erp(erp);
 W = {'N1', 80, 130; 'N1', 80, 120; 'N1', 80, 150; 'MMN', 130, 200; 'MMN', 100, 200; 'MMN', 100, 250; 'MMN', 150, 250};
 con = {"Walk-Free minus Sit", 2, 1; "Water minus Clay", 3, 4};

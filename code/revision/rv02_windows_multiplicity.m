@@ -1,6 +1,6 @@
 function R = rv02_windows_multiplicity(erp)
 % RV02_WINDOWS_MULTIPLICITY  N1- and MMN-window tests for both contrasts with
-%   Holm-Bonferroni sensitivity (Supplementary Table S4), the descriptive simple
+%   Holm-Bonferroni sensitivity (Supplementary Table S3), the descriptive simple
 %   effects (Results 3.1), and the mean N1 interaction contrast (Fig. 2e).
 E = rv_load_erp(erp);
 win = [80 130; 130 200]; wname = ["N1", "MMN"];

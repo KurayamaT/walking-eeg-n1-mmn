@@ -1,6 +1,6 @@
 function T = rv03_covariate_slopes(erp)
 % RV03_COVARIATE_SLOPES  Slopes of the N1 interaction contrast on three
-%   mean-centred covariates (Supplementary Table S6; Results 3.4).
+%   mean-centred covariates (Supplementary Table S5; Results 3.4).
 E = rv_load_erp(erp);
 dn = rv_roi_mean(E.dev, E, 80, 130); sn = rv_roi_mean(E.std, E, 80, 130);
 y = (dn(:, 2) - dn(:, 1)) - (sn(:, 2) - sn(:, 1));

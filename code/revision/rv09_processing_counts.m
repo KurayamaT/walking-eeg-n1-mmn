@@ -1,6 +1,6 @@
 function R = rv09_processing_counts(erp, denominators_csv, logpath)
 % RV09_PROCESSING_COUNTS  Condition-wise processing counts of the primary analysis
-%   (Supplementary Table S5). Rejection percentage = amplitude-rejected epochs
+%   (Supplementary Table S4). Rejection percentage = amplitude-rejected epochs
 %   among candidate epochs lying fully within the recording.
 %   erp: canonical arrays (retained trial counts); denominators_csv: trigger and
 %   boundary counts per recording; logpath: preprocessing log (bad channels, removed ICs).
